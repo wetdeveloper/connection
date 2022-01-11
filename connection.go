@@ -1,4 +1,4 @@
-package connection
+package main
 
 import (
 	"database/sql"
@@ -9,17 +9,17 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func connect() {
+func main() {
 	fmt.Println("connection.go is running")
-	//removeDb()
-	//createDb()
+	//RemoveDb()
+	// CreateDb()
 	sqliteDatabase, _ := sql.Open("sqlite3", "./users.db")
 	defer sqliteDatabase.Close()
-	// createTable(sqliteDatabase)
-	insertUser(sqliteDatabase, "Ali", "5636532")
-	// listUsers(sqliteDatabase)
+	// CreateTable(sqliteDatabase)
+	// InsertUser(sqliteDatabase, "Ali", "5636532")
+	// ListUsers(sqliteDatabase)
 }
-func createTable(db *sql.DB) {
+func CreateTable(db *sql.DB) {
 	createUsersTableSQL := `CREATE TABLE users (
 		"idUser" integer NOT NULL PRIMARY KEY AUTOINCREMENT,		
 		"username" TEXT,
@@ -35,7 +35,7 @@ func createTable(db *sql.DB) {
 	log.Println("user table created")
 }
 
-func insertUser(db *sql.DB, username string, password string) {
+func InsertUser(db *sql.DB, username string, password string) {
 	log.Println("Inserting user record ...")
 	insertUserSQL := `INSERT INTO users(username,password) VALUES (?, ?)`
 	statement, err := db.Prepare(insertUserSQL)
@@ -49,7 +49,7 @@ func insertUser(db *sql.DB, username string, password string) {
 	}
 }
 
-func listUsers(db *sql.DB) {
+func ListUsers(db *sql.DB) {
 	row, err := db.Query("SELECT * FROM users ORDER BY username")
 	if err != nil {
 		log.Fatal(err)
@@ -64,7 +64,7 @@ func listUsers(db *sql.DB) {
 	}
 }
 
-func createDb() {
+func CreateDb() {
 	log.Println("Creating users.db...")
 	file, err := os.Create("users.db")
 	if err != nil {
@@ -74,6 +74,6 @@ func createDb() {
 	log.Println("users.db created")
 }
 
-func removeDb() {
+func RemoveDb() {
 	os.Remove("users.db")
 }
