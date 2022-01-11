@@ -50,6 +50,20 @@ func InsertUser(db *sql.DB, username string, password string) {
 	}
 }
 
+func UpdateUser(db *sql.DB, username string, password string) {
+	log.Println("Updating user record ...")
+	UpdateUserSQL := `UPDATE users SET password=? where username=?`
+	statement, err := db.Prepare(UpdateUserSQL)
+
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+	_, err = statement.Exec(password, username)
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+}
+
 func ListUsers(db *sql.DB) {
 	row, err := db.Query("SELECT * FROM users ORDER BY username")
 	if err != nil {
