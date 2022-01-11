@@ -9,7 +9,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func connect() {
+func Connect() {
 	fmt.Println("connection.go is running")
 	//RemoveDb()
 	// CreateDb()
