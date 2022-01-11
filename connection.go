@@ -9,15 +9,16 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func Connect() {
+func Connect() (db *sql.DB, err error) {
 	fmt.Println("connection.go is running")
 	//RemoveDb()
 	// CreateDb()
 	sqliteDatabase, _ := sql.Open("sqlite3", "./users.db")
-	defer sqliteDatabase.Close()
+	// defer sqliteDatabase.Close()
 	// CreateTable(sqliteDatabase)
 	// InsertUser(sqliteDatabase, "Ali", "5636532")
 	// ListUsers(sqliteDatabase)
+	return sqliteDatabase, err
 }
 func CreateTable(db *sql.DB) {
 	createUsersTableSQL := `CREATE TABLE users (
