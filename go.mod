@@ -1,4 +1,4 @@
-module connection
+module github.com/wetdeveloper/connection/
 
 go 1.13
 
