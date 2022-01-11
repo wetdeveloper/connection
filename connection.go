@@ -23,7 +23,7 @@ func Connect() (db *sql.DB, err error) {
 func CreateTable(db *sql.DB) {
 	createUsersTableSQL := `CREATE TABLE users (
 		"idUser" integer NOT NULL PRIMARY KEY AUTOINCREMENT,		
-		"username" TEXT,
+		"username" TEXT NOT NULL UNIQUE,
 		"password" TEXT
 	  );` // SQL Statement for Create Table
 
