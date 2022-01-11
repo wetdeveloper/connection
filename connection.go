@@ -1,4 +1,4 @@
-package main
+package connection
 
 import (
 	"database/sql"
@@ -9,7 +9,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func main() {
+func connect() {
 	fmt.Println("connection.go is running")
 	//RemoveDb()
 	// CreateDb()
