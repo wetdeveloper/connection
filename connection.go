@@ -113,19 +113,22 @@ func SelectUser(db *sql.DB, Username string) bool {
 	}
 }
 
-func ListUsers(db *sql.DB) {
+func ListUsers(db *sql.DB) map[string]interface{} {
 	row, err := db.Query("SELECT * FROM users ORDER BY username")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer row.Close()
+	userslist := map[string]interface{}{}
 	for row.Next() {
 		var id int
 		var username string
 		var password string
 		row.Scan(&id, &username, &password)
+		userslist[username] = password
 		log.Println("User: ", username, " ", password, " ")
 	}
+	return userslist
 }
 
 func CreateDb() {
