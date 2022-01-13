@@ -1,15 +1,12 @@
 package connection
 
 import (
-	// "database/sql"
-
 	"fmt"
 	"log"
 
-	"github.com/wetdeveloper/crud-api-config"
+	config "github.com/wetdeveloper/crud-api-config"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	// _ "github.com/mattn/go-sqlite3"
 )
 
 type User struct {
@@ -91,4 +88,8 @@ func ListUsers(mydb *gorm.DB) map[string]interface{} {
 	}
 	return userslist
 
+}
+
+func Rback(mydb *gorm.DB) {
+	mydb.Rollback()
 }
